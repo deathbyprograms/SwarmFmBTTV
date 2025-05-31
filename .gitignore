@@ -1,6 +1,5 @@
 node_modules
-build/*.hot-update.*
-build/*.map
+build
 dist
 .DS_Store
 .vscode
