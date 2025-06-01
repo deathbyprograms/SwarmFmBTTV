@@ -10,8 +10,8 @@
 // ==/UserScript==
 
 (function betterttv() {
-    GM_addElement('script', {
-        src: 'https://cdn.jsdelivr.net/gh/<repo>/build/betterttv.js',
-        type: 'text/javascript'
-    });
-})()
+  GM_addElement('script', {
+    src: 'https://cdn.jsdelivr.net/gh/<repo>/build/betterttv.js',
+    type: 'text/javascript',
+  });
+})();
