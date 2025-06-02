@@ -1,7 +1,6 @@
 import fs from 'fs/promises';
 import {createRequire} from 'module';
 import path from 'path';
-import {sentryWebpackPlugin} from '@sentry/webpack-plugin';
 import {CleanWebpackPlugin} from 'clean-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
@@ -218,8 +217,6 @@ export default async (env, argv) => {
         PROD_CDN_ENDPOINT: PROD_ENDPOINT,
         EXT_VER: version,
         GIT_REV: process.env.GIT_REV || git.long(),
-        SENTRY_URL:
-          process.env.SENTRY_URL || 'https://b289038a9b004560bcb58396066ee847@o23210.ingest.sentry.io/5730387',
         CDN_ENDPOINT,
       }),
       new optimize.LimitChunkCountPlugin({
@@ -244,23 +241,6 @@ export default async (env, argv) => {
       new TerserPlugin({
         extractComments: false,
       }),
-      ...(process.env.GITHUB_TAG || process.env.GIT_REV
-        ? [
-            sentryWebpackPlugin({
-              authToken: process.env.GITHUB_TAG != null ? process.env.SENTRY_AUTH_TOKEN : undefined,
-              release: {
-                name: process.env.GIT_REV || git.long(),
-              },
-              org: 'nightdev',
-              project: 'betterttv-extension',
-              sourcemaps: {
-                include: ['./build'],
-                ignore: ['dev', 'node_modules', 'webpack.config.js'],
-              },
-              telemetry: false,
-            }),
-          ]
-        : []),
       ...(process.env.GITHUB_TAG
         ? [
             new FileManagerPlugin({
