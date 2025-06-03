@@ -18,10 +18,13 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run build:prod
+        env:
+          GITHUB_REPO: ${{ github.repository }}
       - name: Publish release
         if: ${{ startsWith(github.ref, 'refs/tags/') }}
         uses: ncipollo/release-action@v1
         with:
+          allowUpdates: true
           artifacts: build/betterttv.tar.gz
           artifactContentType: application/gzip
           token: ${{ secrets.GITHUB_TOKEN }}

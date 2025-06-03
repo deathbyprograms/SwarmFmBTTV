@@ -243,6 +243,20 @@ export default async (env, argv) => {
       }),
       ...(process.env.GITHUB_TAG
         ? [
+            new CopyPlugin({
+              patterns: [
+                {
+                  from: 'userscriptTemplate.js',
+                  to: './SwarmFmBTTV.user.js',
+                  transform: (content) =>
+                    content
+                      .toString()
+                      .replaceAll('<repo>', process.env.GITHUB_REPO)
+                      .replaceAll('<ver>', process.env.GITHUB_TAG),
+                  info: {minimized: true},
+                },
+              ],
+            }),
             new FileManagerPlugin({
               events: {
                 onEnd: {

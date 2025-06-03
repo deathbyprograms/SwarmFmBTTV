@@ -6,12 +6,12 @@
 // @match        https://*.twitch.tv/*
 // @match        https://*.youtube.com/*
 // @grant        GM_addElement
-// @resource     bttvScript    https://cdn.jsdelivr.net/gh/<repo>/build/betterttv.js
+// @resource     bttvScript https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js
 // ==/UserScript==
 
 (function betterttv() {
   GM_addElement('script', {
-    src: 'https://cdn.jsdelivr.net/gh/<repo>/build/betterttv.js',
+    src: 'https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js',
     type: 'text/javascript',
   });
 })();
