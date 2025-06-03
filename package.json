@@ -1,8 +1,8 @@
 {
-  "name": "BetterTTV",
+  "name": "swarm-fm-bttv",
   "author": "Night",
   "version": "7.6.14",
-  "description": "BetterTTV enhances Twitch with new features, emotes, and more.",
+  "description": "Modified BTTV for Swarm FM",
   "main": "betterttv.js",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/deathbyprograms/TempSwarmFmBTTV.git"
+    "url": "https://github.com/deathbyprograms/SwarmFmBTTV"
   },
   "dependencies": {
     "@babel/core": "7.27.1",
