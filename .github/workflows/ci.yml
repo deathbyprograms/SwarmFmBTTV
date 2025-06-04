@@ -21,10 +21,11 @@ jobs:
         env:
           GITHUB_REPO: ${{ github.repository }}
       - name: Publish release
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
-        uses: ncipollo/release-action@v1
+        uses: softprops/action-gh-release@v2
+        if: github.ref_type == 'tag'
         with:
-          allowUpdates: true
-          artifacts: build/betterttv.tar.gz
-          artifactContentType: application/gzip
           token: ${{ secrets.GITHUB_TOKEN }}
+          generate_release_notes: true
+          files: |
+            build/betterttv.tar.gz
+            build/SwarmFmBTTV.user.js

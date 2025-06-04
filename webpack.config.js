@@ -1,3 +1,4 @@
+import {createHash} from 'crypto';
 import fs from 'fs/promises';
 import {createRequire} from 'module';
 import path from 'path';
@@ -243,20 +244,6 @@ export default async (env, argv) => {
       }),
       ...(process.env.GITHUB_TAG
         ? [
-            new CopyPlugin({
-              patterns: [
-                {
-                  from: 'userscriptTemplate.js',
-                  to: './SwarmFmBTTV.user.js',
-                  transform: (content) =>
-                    content
-                      .toString()
-                      .replaceAll('<repo>', process.env.GITHUB_REPO)
-                      .replaceAll('<ver>', process.env.GITHUB_TAG),
-                  info: {minimized: true},
-                },
-              ],
-            }),
             new FileManagerPlugin({
               events: {
                 onEnd: {
@@ -272,6 +259,26 @@ export default async (env, argv) => {
                   ],
                 },
               },
+            }),
+            new CopyPlugin({
+              patterns: [
+                {
+                  from: 'userscriptTemplate.js',
+                  to: './SwarmFmBTTV.user.js',
+                  transform: async (content) =>
+                    content
+                      .toString()
+                      .replaceAll('<repo>', process.env.GITHUB_REPO)
+                      .replaceAll('<ver>', process.env.GITHUB_TAG)
+                      .replaceAll(
+                        '<hash>',
+                        createHash('sha256')
+                          .update(await fs.readFile('./build/betterttv.js'))
+                          .digest('hex')
+                      ),
+                  info: {minimized: true},
+                },
+              ],
             }),
           ]
         : []),

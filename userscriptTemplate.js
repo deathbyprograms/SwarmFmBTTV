@@ -2,16 +2,14 @@
 // @name         SwarmFM BTTV
 // @description  Modified BTTV for Swarm FM.
 // @source       https://github.com/<repo>
-// @version      0.0.1
+// @version      <ver>
 // @match        https://*.twitch.tv/*
 // @match        https://*.youtube.com/*
 // @grant        GM_addElement
-// @resource     bttvScript https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js
+// @resource     bttvScript https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js:sha256-<hash>
 // ==/UserScript==
 
-(function betterttv() {
-  GM_addElement('script', {
-    src: 'https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js',
-    type: 'text/javascript',
-  });
-})();
+GM_addElement('script', {
+  src: 'https://cdn.jsdelivr.net/gh/<repo>@<ver>/build/betterttv.js',
+  type: 'text/javascript',
+});
